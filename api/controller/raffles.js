@@ -23,7 +23,7 @@ const getRaffleAllProjects = () => {
             foreignField: "_id",
             as: "projectsraffle"
         }
-    }
+    },
     {   $unwind:"$projectsraffle" }, 
     {   
         $project:{
@@ -35,8 +35,6 @@ const getRaffleAllProjects = () => {
             name : "$projectsraffle.name",
             description : "$projectsraffle.description",
             socialMedia : "$projectsraffle.socialMediaHandles",
-            
-            
         } 
     }
 

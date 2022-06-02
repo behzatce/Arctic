@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Breakpoint, { BreakpointProvider, setDefaultBreakpoints } from "react-socks";
 import { Link } from '@reach/router';
 import useOnclickOutside from "react-cool-onclickoutside";
-import { getStarknet } from "get-starknet"
-
+import {walletProvider} from '../../scripts/artifacts/walletProvider'
 setDefaultBreakpoints([
   { xs: 0 },
   { l: 1199 },
@@ -32,10 +31,10 @@ const Header= function() {
     const [openMenu2, setOpenMenu2] = React.useState(false);
     const [openMenu3, setOpenMenu3] = React.useState(false);
 
-    const Wallet = () => {
-      var stark = getStarknet()
-      stark.enable()
-      console.log("stark",stark)
+    const testFunc = () => {
+     
+      walletProvider().then((stark) => console.log("stark",stark))
+      
     }
 
     const closeMenu = (): void => {
@@ -115,7 +114,7 @@ const Header= function() {
               <div className='mainside'>
                 <NavLink to="" className="btn-main">
                   <i className="icon_wallet_alt"></i>
-                  <span onClick={Wallet}>Connect Wallet</span>
+                  <span onClick={testFunc}>Connect Wallet</span>
                 </NavLink>
               </div>
                   

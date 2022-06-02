@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Clock from "./clock";
 import { createGlobalStyle } from 'styled-components';
 import { getRaffleAllProjects } from '../../scripts/controller/raffle'
-
 const GlobalStyles = createGlobalStyle`
     .de_countdown{
         position: relative;
@@ -75,7 +74,7 @@ export default class Responsive extends Component {
     componentDidMount() {
         let raffleState = this.state.raffles
         this.getRaffle().then((res) => this.setState({
-            raffles: [ ...(res)]
+            raffles: [...raffleState, ...(res)]
         }));
         setTimeout(() => {
             console.log(this.state.raffles)

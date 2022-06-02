@@ -4,18 +4,21 @@ export const addRaffles = (raffleData) => {
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify(raffleData);
-  console.log(raw)
   var requestOptions = {
     method: 'POST',
     headers: myHeaders,
     body: raw,
     redirect: 'follow'
   };
-
-  fetch("http://localhost:8080/addRaffles", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+    try {
+      fetch("http://localhost:8080/addRaffles", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    } catch (error) {
+      return error
+    }
+ 
 }
 
 
@@ -28,9 +31,13 @@ export const getRaffleAllProjects = () => {
     headers: myHeaders,
     redirect: 'follow'
   };
-
-  const result = fetch("http://localhost:8080/getRaffleAllProjects", requestOptions)
-  return result
+  try {
+    const result = fetch("http://localhost:8080/getRaffleAllProjects", requestOptions)
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+ 
 }
 
 export const getRaffleProject = (raffleId) => {

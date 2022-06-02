@@ -1,7 +1,7 @@
 
 export const unixToDate = (unix_timestamp) => {
     
-    unix_timestamp = (unix_timestamp-(unix_timestamp%1000))/1000;
+    // unix_timestamp = (unix_timestamp-(unix_timestamp%1000))/1000;
     const endTime = (unix_timestamp + (24*60*60));
 
     var nowTime = Date.now()
