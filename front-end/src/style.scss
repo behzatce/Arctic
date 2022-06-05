@@ -1212,6 +1212,31 @@ p.lead {
     }
   }
 }
+
+.wallet-connect{
+  text-align: center;
+  color: #fff;
+  background: #222;
+  letter-spacing: normal;
+  outline: 0;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 6px 20px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0);
+  transition: all 0.3s ease;
+  &:hover {
+    color: $color;
+    background: $white;
+    border: solid 1px #888;
+    box-shadow: 2px 2px 20px 0px #ff343f;
+    transition: all 0.3s ease;
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.09);
+  }
+}
+
 /* disable click active */
 .navbar-item {
   pointer-events: auto;
@@ -4274,6 +4299,7 @@ i.font60 {
   .de_nav.text-left {
     margin-left: 0;
   }
+
 }
 @media only screen and (max-width: 600px) {
 }

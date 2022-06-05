@@ -29,6 +29,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   -webkit-animation-duration: 2s;
   animation-duration: 2s;
 }
+.wallet{
+  border: solid;
+}
+
 
 @-webkit-keyframes bounce {
   0%,100%,20%,50%,80% {

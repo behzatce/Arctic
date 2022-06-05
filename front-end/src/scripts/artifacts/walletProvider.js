@@ -7,9 +7,7 @@ export const walletProvider = async () => {
   if (!starknet) {
     throw Error("User rejected wallet selection or silent connect found nothing")
   }
-
   await starknet.enable()
-
   if (starknet.isConnected) {
     return starknet
   } else {
