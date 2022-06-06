@@ -58,7 +58,6 @@ export default class Responsive extends Component {
         this.setState({
             raffles: [...raffleState, ...(this.dummyData.slice(start, end))]
         });
-        console.log("ok")
         }
 
     onImgLoad({target:img}) {
@@ -99,7 +98,7 @@ export default class Responsive extends Component {
                     </div>
                     <div className="nft__item_info">
                         <span onClick={()=> window.open(raffle.nftLink, "_self")}>
-                            <h4>ssd</h4>
+                            <h4>{raffle.title}</h4>
                         </span>
                         <div className="nft__item_price">
                         <i className="fa fa-ticket"></i><span>{raffle.ticketPrice}</span>

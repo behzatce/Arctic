@@ -1,10 +1,10 @@
 import React from "react";
 import Clock from "../components/clock";
-import Footer from "../components/footer";
 import { createGlobalStyle } from "styled-components";
 import { Discord } from "react-bootstrap-icons";
 import { Twitter } from "react-bootstrap-icons";
 import { TrophyFill } from "react-bootstrap-icons";
+import { getStarknet } from "get-starknet"
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.white {
@@ -18,6 +18,10 @@ const GlobalStyles = createGlobalStyle`
 
 const Colection = function () {
   const [openCheckout, setOpenCheckout] = React.useState(false);
+  React.useEffect(() => {
+    const starknet = getStarknet()
+    console.log(starknet)
+  },[])
 
   return (
     <div>
@@ -62,7 +66,7 @@ const Colection = function () {
       
               <div className="spacer-40"></div>
               <div className="de_tab">
-                <h3>Details</h3>
+                <h3>Buy Ticket</h3>
 
                 <div className="de_tab_content">
                   {/* button for checkout */}
