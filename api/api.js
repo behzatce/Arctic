@@ -5,8 +5,9 @@ const { addProjects, getProjects } = require('./controller/projects')
 const { preProject, getPreProjects } = require('./controller/apply')
 const { addRaffle, getRaffleAllProjects, getRaffleProject } = require('./controller/raffles')
 const { addEntry, getEntries, getUserEntries, updateUserEntry } = require('./controller/userEntry')
-const { getTestRaffle,addTestRaffle} = require('./controller/testRaffle')
-const {addTestEntry,getUserTestEntry} = require('./controller/testRaffleEntry')
+const { getTestRaffle, addTestRaffle ,updateTestRaffle,getPastTestRaffle} = require('./controller/testRaffle')
+const { addTestEntry, getUserTestEntry, getTestEntries } = require('./controller/testRaffleEntry')
+const { addWinners, getAllWinners, getwinners } = require('./controller/winners')
 const crypto = require('crypto');
 
 const app = express();
@@ -154,7 +155,7 @@ app.post('/updateEntry', (req, res) => {
         user: postData.user,
         entryCount: postData.entryCount
     }
-    console.log("userData",userData)
+    console.log("userData", userData)
     updateUserEntry(userData)
         .then((resq) => res.send(resq))
         .catch((err) => res.send(err))
@@ -163,14 +164,14 @@ app.post('/updateEntry', (req, res) => {
 
 // TEST start //
 
-app.post('/testRaffle', (req,res) => {
+app.post('/testRaffle', (req, res) => {
     const postData = req.body
     getTestRaffle(postData.date)
         .then((resq) => res.send(resq))
         .catch((err) => res.send(err))
 })
 
-app.post('/addTestRaffle', (req,res) => {
+app.post('/addTestRaffle', (req, res) => {
     const postData = req.body
     const raffleData = {
         raffleNumber: postData.raffleNumber,
@@ -178,11 +179,11 @@ app.post('/addTestRaffle', (req,res) => {
         startedTime: postData.startedTime
     }
     addTestRaffle(raffleData).save()
-    .then((resq) => res.send(resq))
-    .catch((err) => res.send(err))
+        .then((resq) => res.send(resq))
+        .catch((err) => res.send(err))
 })
 
-app.post('/joinTestRaffle', (req,res) => {
+app.post('/joinTestRaffle', (req, res) => {
     const postData = req.body
     const raffleData = {
         raffleId: postData.raffleId,
@@ -190,18 +191,71 @@ app.post('/joinTestRaffle', (req,res) => {
         raffleStartTime: postData.raffleStartTime
     }
     addTestEntry(raffleData).save()
-    .then((resq) => res.send(resq))
-    .catch((err) => res.send(err))
+        .then((resq) => res.send(resq))
+        .catch((err) => res.send(err))
 })
 
 
-app.post('/getUserTestEntry', (req,res) => {
+app.post('/getUserTestEntry', (req, res) => {
     const postData = req.body
 
-    getUserTestEntry(postData.walletAddress,postData.raffleId)
-    .then((resq) => res.send(resq))
-    .catch((err) => res.send(err))
+    getUserTestEntry(postData.walletAddress, postData.raffleId)
+        .then((resq) => res.send(resq))
+        .catch((err) => res.send(err))
+})
+
+
+app.post('/getAllEntry', (req, res) => {
+    const postData = req.body
+
+    getTestEntries(postData.raffleId)
+        .then((resq) => res.send(resq))
+        .catch((err) => res.send(err))
+})
+
+app.get('/getPastTestRaffle', (req, res) => {
+
+    getPastTestRaffle()
+        .then((resq) => res.send(resq))
+        .catch((err) => res.send(err))
+})
+
+
+app.post('/updateTestRaffle', (req, res) => {
+    const postData = req.body
+
+    updateTestRaffle(postData.raffleId)
+        .then((resq) => res.send(resq))
+        .catch((err) => res.send(err))
 })
 
 
 // TEST end //
+
+app.post('/addWinners', (req, res) => {
+    const postData = req.body
+    const winnerData = {
+        raffleId: postData.raffleId,
+        userWallet: postData.walletAddress,
+        entryCount: 1
+    }
+    console.log(winnerData)
+    addWinners(winnerData).save()
+        .then((resq) => res.send(resq))
+        .catch((err) => res.send(err))
+})
+
+app.post('/getWinners', (req, res) => {
+    const postData = req.body
+    getwinners( postData.raffleId)
+        .then((resq) => res.send(resq))
+        .catch((err) => res.send(err))
+})
+
+app.get('/getAllWinners', (req, res) => {
+    getAllWinners()
+        .then((resq) => res.send(resq))
+        .catch((err) => res.send(err))
+})
+
+

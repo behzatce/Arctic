@@ -19,6 +19,10 @@ const rafflesSchema = new Schema({
         type:Number,
         require: true,
         default:Date.now
+    },
+    isPast:{
+        type:Boolean,
+        default:false
     }
 
 },{timestamp: true}) 

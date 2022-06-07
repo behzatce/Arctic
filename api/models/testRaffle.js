@@ -13,11 +13,15 @@ const testRafflesSchema = new Schema({
     startedTime:{
         type:String,
         require: true,
+    },
+    isPast:{
+        type:Boolean,
+        default:false
     }
 
 },{timestamp: true}) 
 
 
-const  Raflles= mongoose.model('testFaffles', testRafflesSchema)
+const  Raflles= mongoose.model('testRaffles', testRafflesSchema)
 
 module.exports = Raflles

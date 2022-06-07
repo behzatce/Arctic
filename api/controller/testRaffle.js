@@ -15,4 +15,12 @@ const addTestRaffle = (rafflesData) => {
     return raffles
 }
 
-module.exports = { getTestRaffle,addTestRaffle}
+const updateTestRaffle = (raffleId) => {
+    const UpdateTestRaffle = testRaffle.findOneAndUpdate({raffleNumber:raffleId }, { "isPast": true })
+    return UpdateTestRaffle
+}
+const getPastTestRaffle = () => {
+    const GetPastTestRaffle = testRaffle.find({isPast: true}).select('raffleNumber').select('startedTime');
+    return GetPastTestRaffle
+}
+module.exports = { getTestRaffle,addTestRaffle,updateTestRaffle,getPastTestRaffle}
