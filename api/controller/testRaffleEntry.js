@@ -10,12 +10,18 @@ const addTestEntry = (entryData) => {
 }
 
 const getTestEntries = (raffleId) => {
-    const GetEntries = userEntry.find({raffleId: raffleId})
+    const GetEntries = testRaffleEntry.find({raffleId: raffleId})
     return GetEntries
+}
+
+const getUserTestEntry = (walletAddress,raffleId) => {
+    const GetUserEntry = testRaffleEntry.find({walletAddress: walletAddress, raffleId:raffleId})
+    return GetUserEntry
 }
 
 
 module.exports = {
     addTestEntry,
-    getTestEntries
+    getTestEntries,
+    getUserTestEntry
 }

@@ -1,7 +1,8 @@
 const testRaffle = require('../models/testRaffle')
 
-const getTestRaffle = () => {
-    const GetTestRaffle = testRaffle.find()
+const getTestRaffle = (date) => {
+
+    const GetTestRaffle = testRaffle.find({startedTime:date })
     return GetTestRaffle
 }
 

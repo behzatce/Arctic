@@ -6,7 +6,7 @@ const { preProject, getPreProjects } = require('./controller/apply')
 const { addRaffle, getRaffleAllProjects, getRaffleProject } = require('./controller/raffles')
 const { addEntry, getEntries, getUserEntries, updateUserEntry } = require('./controller/userEntry')
 const { getTestRaffle,addTestRaffle} = require('./controller/testRaffle')
-const {addTestEntry} = require('./controller/testRaffleEntry')
+const {addTestEntry,getUserTestEntry} = require('./controller/testRaffleEntry')
 const crypto = require('crypto');
 
 const app = express();
@@ -161,8 +161,11 @@ app.post('/updateEntry', (req, res) => {
 })
 
 
-app.get('/testRaffle', (req,res) => {
-    getTestRaffle()
+// TEST start //
+
+app.post('/testRaffle', (req,res) => {
+    const postData = req.body
+    getTestRaffle(postData.date)
         .then((resq) => res.send(resq))
         .catch((err) => res.send(err))
 })
@@ -190,3 +193,15 @@ app.post('/joinTestRaffle', (req,res) => {
     .then((resq) => res.send(resq))
     .catch((err) => res.send(err))
 })
+
+
+app.post('/getUserTestEntry', (req,res) => {
+    const postData = req.body
+
+    getUserTestEntry(postData.walletAddress,postData.raffleId)
+    .then((resq) => res.send(resq))
+    .catch((err) => res.send(err))
+})
+
+
+// TEST end //
