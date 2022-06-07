@@ -5,6 +5,8 @@ const { addProjects, getProjects } = require('./controller/projects')
 const { preProject, getPreProjects } = require('./controller/apply')
 const { addRaffle, getRaffleAllProjects, getRaffleProject } = require('./controller/raffles')
 const { addEntry, getEntries, getUserEntries, updateUserEntry } = require('./controller/userEntry')
+const { getTestRaffle,addTestRaffle} = require('./controller/testRaffle')
+const {addTestEntry} = require('./controller/testRaffleEntry')
 const crypto = require('crypto');
 
 const app = express();
@@ -156,4 +158,35 @@ app.post('/updateEntry', (req, res) => {
     updateUserEntry(userData)
         .then((resq) => res.send(resq))
         .catch((err) => res.send(err))
+})
+
+
+app.get('/testRaffle', (req,res) => {
+    getTestRaffle()
+        .then((resq) => res.send(resq))
+        .catch((err) => res.send(err))
+})
+
+app.post('/addTestRaffle', (req,res) => {
+    const postData = req.body
+    const raffleData = {
+        raffleNumber: postData.raffleNumber,
+        totalWinners: postData.totalWinners,
+        startedTime: postData.startedTime
+    }
+    addTestRaffle(raffleData).save()
+    .then((resq) => res.send(resq))
+    .catch((err) => res.send(err))
+})
+
+app.post('/joinTestRaffle', (req,res) => {
+    const postData = req.body
+    const raffleData = {
+        raffleId: postData.raffleId,
+        walletAddress: postData.walletAddress,
+        raffleStartTime: postData.raffleStartTime
+    }
+    addTestEntry(raffleData).save()
+    .then((resq) => res.send(resq))
+    .catch((err) => res.send(err))
 })
