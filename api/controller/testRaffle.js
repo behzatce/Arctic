@@ -1,8 +1,32 @@
 const testRaffle = require('../models/testRaffle')
 
-const getTestRaffle = (date) => {
+const getTestRaffle =  (date) => {
 
-    const GetTestRaffle = testRaffle.find({startedTime:date })
+    const GetTestRaffle = testRaffle.aggregate([
+        {
+            $match: {
+                startedTime:date,
+            },
+          },
+        {
+        $lookup: {
+            from: "testraffleentries", // collection name in db
+            localField: "raffleNumber",
+            foreignField: "raffleId",
+            as: "raffleEntries"
+        }
+    },
+    {   
+        $project:{
+            _id : 1,
+            raffleNumber : 1,
+            totalWinners : 1,
+            startedTime: 1,
+            entryCount: { $size: "$raffleEntries" }
+        } 
+    }
+
+])
     return GetTestRaffle
 }
 
